@@ -14,4 +14,17 @@
             code="code2"
             label="label2"
     />
+    <operator
+            ID_OPERATEUR="1"
+            fname="fname1"
+            lname="lname1"
+            password="1111"
+    />
+    <operator
+            ID_OPERATEUR="2"
+            fname="fname2"
+            lname="lname2"
+            password="2222"
+    />
 </dataset>
+
