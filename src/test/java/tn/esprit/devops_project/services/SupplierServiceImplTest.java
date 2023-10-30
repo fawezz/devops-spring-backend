@@ -34,14 +34,14 @@ class SupplierServiceImplTest {
     private SupplierServiceImpl supplierService;
 
     @Test
-    @DatabaseSetup("/data-set/stock-data.xml")
+    @DatabaseSetup("/data-set/supplier-data.xml")
     void retrieveAllSuppliers() {
         final List<Supplier> allSuppliers = this.supplierService.retrieveAllSuppliers();
         assertEquals(allSuppliers.size(), 2);
     }
 
     @Test
-    @DatabaseSetup("/data-set/stock-data.xml")
+    @DatabaseSetup("/data-set/supplier-data.xml")
     void addSupplier() {
         final Supplier supplier = new Supplier();
         supplier.setCode("code3");
@@ -52,7 +52,7 @@ class SupplierServiceImplTest {
     }
 
     @Test
-    @DatabaseSetup("/data-set/stock-data.xml")
+    @DatabaseSetup("/data-set/supplier-data.xml")
     void updateSupplier() {
         Supplier supplier = supplierService.retrieveSupplier(1L);
         supplier.setCode("newCode");
@@ -63,7 +63,7 @@ class SupplierServiceImplTest {
     }
 
     @Test
-    @DatabaseSetup("/data-set/stock-data.xml")
+    @DatabaseSetup("/data-set/supplier-data.xml")
     void deleteSupplier() {
         //case of ID not found
         assertThrows(EmptyResultDataAccessException.class, ()-> {
@@ -78,7 +78,7 @@ class SupplierServiceImplTest {
     }
 
     @Test
-    @DatabaseSetup("/data-set/stock-data.xml")
+    @DatabaseSetup("/data-set/supplier-data.xml")
     void retrieveSupplier() {
         final Supplier supplier = this.supplierService.retrieveSupplier(2L);
         assertEquals(supplier.getLabel(), "label2");
