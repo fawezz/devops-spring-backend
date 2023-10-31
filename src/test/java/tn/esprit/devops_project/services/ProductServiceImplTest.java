@@ -74,6 +74,8 @@ class ProductServiceImplTest {
     void retrieveProductByCategory() {
         final List<Product> clothingProducts = productService.retrieveProductByCategory(ProductCategory.CLOTHING);
         assertEquals(clothingProducts.size(),1);
+        //testing valueOf
+        assertEquals(ProductCategory.valueOf(clothingProducts.get(0).getCategory().name()),ProductCategory.CLOTHING);
     }
 
     @Test
@@ -86,7 +88,7 @@ class ProductServiceImplTest {
     @Test
     @DatabaseSetup("/data-set/product-data.xml")
     void retreiveProductStock() {
-        final List<Product> clothingProducts = productService.retreiveProductStock(1L);
-        assertEquals(clothingProducts.size(),2);
+        final List<Product> products = productService.retreiveProductStock(1L);
+        assertEquals(products.size(),2);
     }
 }

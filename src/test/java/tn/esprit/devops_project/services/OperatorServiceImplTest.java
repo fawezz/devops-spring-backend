@@ -19,6 +19,7 @@ import tn.esprit.devops_project.entities.Supplier;
 
 import java.util.List;
 
+import static java.util.Collections.emptySet;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -44,10 +45,8 @@ class OperatorServiceImplTest {
     @Test
     @DatabaseSetup("/data-set/stock-data.xml")
     void addOperator() {
-        final Operator operator = new Operator();
-        operator.setFname("new fname");
-        operator.setLname("new lname");
-        operator.setPassword("newPassword");
+        final Operator operator = new Operator(5L,"new fname","new lname","new password",emptySet());
+        operator.setIdOperateur(3L);
         this.operatorService.addOperator(operator);
         assertNotNull(this.operatorService.retrieveOperator(3L));
         assertEquals(this.operatorService.retrieveAllOperators().size(), 3);
@@ -66,9 +65,13 @@ class OperatorServiceImplTest {
         Operator operator = operatorService.retrieveOperator(1L);
         operator.setLname("new lname");
         operator.setFname("new fname");
+        operator.setPassword("new password");
+        operator.setInvoices(emptySet());
         final Operator modifiedOperator = operatorService.updateOperator(operator);
         assertEquals(modifiedOperator.getFname(), "new fname");
         assertEquals(modifiedOperator.getLname(), "new lname");
+        assertEquals(modifiedOperator.getPassword(), "new password");
+        assertEquals(modifiedOperator.getInvoices().size(), 0);
     }
 
     @Test

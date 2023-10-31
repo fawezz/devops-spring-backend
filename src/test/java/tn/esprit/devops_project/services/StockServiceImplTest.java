@@ -18,7 +18,9 @@ import org.springframework.util.CollectionUtils;
 import tn.esprit.devops_project.entities.Stock;
 
 import java.util.List;
+import java.util.Set;
 
+import static java.util.Collections.emptySet;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -38,10 +40,16 @@ class StockServiceImplTest {
     @DatabaseSetup("/data-set/stock-data.xml")
     void addStock() {
         final Stock stock = new Stock();
+        stock.setIdStock(29L);
         stock.setTitle("Title");
+        stock.setProducts(emptySet());
         this.stockService.addStock(stock);
         assertEquals(this.stockService.retrieveAllStock().size(),2);
         assertEquals(this.stockService.retrieveStock(2L).getTitle(),"Title");
+
+        final Stock stock2 = new Stock(30L, "Title",emptySet());
+        this.stockService.addStock(stock2);
+        assertEquals(this.stockService.retrieveAllStock().size(),3);
     }
 
     @Test
@@ -49,6 +57,7 @@ class StockServiceImplTest {
     void retrieveStock() {
         final Stock stock = this.stockService.retrieveStock(1L);
         assertEquals("stock 1", stock.getTitle());
+        assertEquals(stock.getProducts().size(), 0);
     }
 
     @Test

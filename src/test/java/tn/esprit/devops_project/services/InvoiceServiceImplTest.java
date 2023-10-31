@@ -62,6 +62,7 @@ class InvoiceServiceImplTest {
     void retrieveInvoice() {
         final Invoice invoice = this.invoiceService.retrieveInvoice(2L);
         assertEquals(invoice.getAmountInvoice(), 2.2F);
+        assertEquals(invoice.getAmountDiscount(), 2.2F);
         //case of ID not found
         assertThrows(NullPointerException.class, ()-> {
             this.invoiceService.retrieveInvoice(700L);
@@ -73,6 +74,7 @@ class InvoiceServiceImplTest {
     void getInvoicesBySupplier() {
         final List<Invoice> invoices = invoiceService.getInvoicesBySupplier(1L);
         assertEquals(invoices.size(),2);
+        assertEquals(invoices.get(0).getSupplier().getIdSupplier(),1L);
         assertThrows(NullPointerException.class, ()-> {
             this.invoiceService.getInvoicesBySupplier(700L);
         });
