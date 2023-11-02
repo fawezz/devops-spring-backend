@@ -4,10 +4,12 @@
             ID_SUPPLIER="1"
             code="code1"
             label="label1"
+            supplier_category="ORDINAIRE"
     />
     <supplier
             ID_SUPPLIER="2"
             code="code2"
             label="label2"
+            supplier_category="ORDINAIRE"
     />
 </dataset>

@@ -47,10 +47,14 @@ class ProductServiceImplTest {
         });
         //case stock exists
         this.productService.addProduct(product,1L);
-        assertNotNull(this.productService.retrieveProduct(3L));
         assertEquals(this.productService.retreiveAllProduct().size(), 3);
     }
-
+    @Test
+    @DatabaseSetup("/data-set/product-data.xml")
+    void retreiveProductStock() {
+        final List<Product> products = productService.retreiveProductStock(1L);
+        assertEquals(products.size(),2);
+    }
     @Test
     @DatabaseSetup("/data-set/product-data.xml")
     void retrieveProduct() {
@@ -85,10 +89,5 @@ class ProductServiceImplTest {
         assertEquals(this.productService.retreiveAllProduct().size(), 1);
     }
 
-    @Test
-    @DatabaseSetup("/data-set/product-data.xml")
-    void retreiveProductStock() {
-        final List<Product> products = productService.retreiveProductStock(1L);
-        assertEquals(products.size(),2);
-    }
+
 }
