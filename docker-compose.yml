@@ -17,10 +17,10 @@ services:
       image: faouez/backend:latest
       restart: on-failure
       ports:
-        - "8089:8089"
+        - "8082:8082"
       environment:
         SERVER_SERVLET_CONTEXT_PATH: /SpringMVC
-        SERVER_PORT: 8089
+        SERVER_PORT: 8082
         SPRING_DATASOURCE_URL:  jdbc:mysql://mysqldb:3306/fawez_DB?createDatabaseIfNotExists=true
         SPRING_DATASOURCE_USERNAME: root
     frontend:
