@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+    mysqldb:
+      image: mysql:5.7
+      restart: unless-stopped
+      environment:
+        - MYSQL_DATABASE=fawez_DB
+        - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      ports:
+        - 3306:3306
+      volumes:
+        - db:/var/lib/mysql
+    backend:
+      depends_on:
+        - mysqldb
+      image: faouez/backend:latest
+      restart: on-failure
+      ports:
+        - "8089:8089"
+      environment:
+        SERVER_SERVLET_CONTEXT_PATH: /SpringMVC
+        SERVER_PORT: 8089
+        SPRING_DATASOURCE_URL:  jdbc:mysql://mysqldb:3306/fawez_DB?createDatabaseIfNotExists=true
+        SPRING_DATASOURCE_USERNAME: root
+    frontend:
+      depends_on:
+        - mysqldb
+        - backend
+      image: faouez/frontend:latest
+      restart: on-failure
+      ports:
+        - "80:80"
+
+
+volumes:
+  db:
