@@ -16,7 +16,9 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.springframework.transaction.annotation.Transactional;
 import tn.esprit.devops_project.entities.Stock;
 import tn.esprit.devops_project.entities.Supplier;
+import tn.esprit.devops_project.entities.SupplierCategory;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -88,5 +90,9 @@ class SupplierServiceImplTest {
         assertThrows(IllegalArgumentException.class, ()-> {
             this.supplierService.retrieveSupplier(700L);
         });
+
+        //testing entity methods
+        supplier.setInvoices(Collections.emptySet());
+        Supplier newSupplier = new Supplier(33L, "mohsen", "ahmed", SupplierCategory.ORDINAIRE, Collections.emptySet());
     }
 }

@@ -19,6 +19,7 @@ import tn.esprit.devops_project.entities.Product;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -67,6 +68,20 @@ class InvoiceServiceImplTest {
         assertThrows(NullPointerException.class, ()-> {
             this.invoiceService.retrieveInvoice(700L);
         });
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            //just testing entity methods
+            Date date = dateFormat.parse("2025-01-01");
+            invoice.setDateCreationInvoice(date);
+            invoice.setDateLastModificationInvoice(date);
+            invoice.setIdInvoice(88L);
+            invoice.setAmountDiscount(0.2f);
+            invoice.setAmountInvoice(0.5f);
+            invoice.setSupplier(invoice.getSupplier());
+            Invoice newInvoice = new Invoice(invoice.getIdInvoice(), 0.2f, 0.6f, date, date, false, Collections.emptySet(), invoice.getSupplier());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test

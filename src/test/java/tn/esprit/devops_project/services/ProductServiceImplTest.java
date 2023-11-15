@@ -64,6 +64,8 @@ class ProductServiceImplTest {
         assertThrows(NullPointerException.class, ()-> {
             this.productService.retrieveProduct(700L);
         });
+        //testing entity methods
+        Product newProduct = new Product(69L, "name", 10f, 20, ProductCategory.CLOTHING, product.getStock());
     }
 
     @Test
